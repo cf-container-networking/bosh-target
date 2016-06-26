@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-function bosh_target_prompt {
+function bosh_target {
     # check for $HOME/bosh_config
     if [ ! -f $HOME/.bosh_config ]; then
         exit 1
