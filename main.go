@@ -54,16 +54,13 @@ func main() {
 
 	if alias {
 		r := regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[8|9|aA|bB][a-f0-9]{3}-[a-f0-9]{12}$")
-		for key, value := range c.Aliases.Target {
-			if value == c.Target {
-				if !r.MatchString(key) {
-					fmt.Print(key)
-					os.Exit(0)
-				}
+		for alias, target := range c.Aliases.Target {
+			if !r.MatchString(alias) && target == c.Target {
+				fmt.Print(alias)
+				os.Exit(0)
 			}
 		}
+	} else {
+		fmt.Print(c.TargetName)
 	}
-
-	fmt.Print(c.TargetName)
-	os.Exit(0)
 }
