@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"regexp"
 
@@ -34,22 +35,19 @@ func main() {
 
 	homeDir := os.Getenv("HOME")
 	if homeDir == "" {
-		fmt.Println("$HOME not set")
-		os.Exit(1)
+		log.Fatal("$HOME not set")
 	}
 
 	buf, err := ioutil.ReadFile(fmt.Sprintf("%s/.bosh_config", homeDir))
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	c := config{}
 
 	err = yaml.Unmarshal(buf, &c)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	if alias {
@@ -60,6 +58,7 @@ func main() {
 				os.Exit(0)
 			}
 		}
+		log.Fatalf("No alias found for %q", c.Target)
 	} else {
 		fmt.Print(c.TargetName)
 	}
