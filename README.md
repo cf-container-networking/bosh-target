@@ -1,7 +1,7 @@
 # bosh-target
 This Go program will print out the currently targeted BOSH director name or alias.  
 
-It will first retrieve your current BOSH target from your `$BOSH_TARGET` env var then `~/.bosh_config`.
+To discover your current BOSH target, first, the program will look at your `$BOSH_TARGET` environment variable. If it's unset, then the program will look in your `~/.bosh_config`.
 
 The program was created with the intention of printing the BOSH director name or alias so that you may easily add
 it to your terminal prompt.
