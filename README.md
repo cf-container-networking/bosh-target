@@ -16,7 +16,7 @@ Usage of bosh-target:
 
 ## Installation
 ```
-$ go install github.com/kkallday/bosh-target
+$ go get github.com/kkallday/bosh-target
 ```
 
 ### Screenshot
