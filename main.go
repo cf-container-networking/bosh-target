@@ -23,7 +23,7 @@ type config struct {
 var alias bool
 
 func main() {
-	flag.BoolVar(&alias, "alias", false, "alias instead of target name")
+	flag.BoolVar(&alias, "alias", false, "prints BOSH director's alias instead of name")
 	flag.Parse()
 
 	boshTarget := os.Getenv("BOSH_TARGET")

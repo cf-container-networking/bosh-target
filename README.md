@@ -11,7 +11,7 @@ it to your terminal prompt.
 $ bosh-target --help
 Usage of bosh-target:
   -alias
-    	alias instead of target name
+    	prints BOSH director's alias instead of name
 ```
 
 ## Installation
