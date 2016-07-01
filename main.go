@@ -21,10 +21,10 @@ type config struct {
 	Aliases    aliases `yaml:"aliases"`
 }
 
-var alias bool
+var wantAlias bool
 
 func main() {
-	flag.BoolVar(&alias, "alias", false, "prints BOSH director's alias instead of name")
+	flag.BoolVar(&wantAlias, "alias", false, "prints BOSH director's alias instead of name")
 	flag.Parse()
 
 	boshTarget := os.Getenv("BOSH_TARGET")
@@ -50,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if alias {
+	if wantAlias {
 		r := regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[8|9|aA|bB][a-f0-9]{3}-[a-f0-9]{12}$")
 		for alias, target := range c.Aliases.Target {
 			if !r.MatchString(alias) && target == c.Target {
