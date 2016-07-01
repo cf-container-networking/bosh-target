@@ -35,19 +35,19 @@ func main() {
 
 	homeDir := os.Getenv("HOME")
 	if homeDir == "" {
-		fail(errors.New("$HOME not set"))
+		exitWithError(errors.New("$HOME not set"))
 	}
 
 	buf, err := ioutil.ReadFile(fmt.Sprintf("%s/.bosh_config", homeDir))
 	if err != nil {
-		fail(err)
+		exitWithError(err)
 	}
 
 	c := config{}
 
 	err = yaml.Unmarshal(buf, &c)
 	if err != nil {
-		fail(err)
+		exitWithError(err)
 	}
 
 	if wantAlias {
@@ -58,13 +58,12 @@ func main() {
 				os.Exit(0)
 			}
 		}
-		fail(errors.New(fmt.Sprintf("No alias found for %q", c.Target)))
-	} else {
-		fmt.Print(c.TargetName)
 	}
+
+	fmt.Print(c.TargetName)
 }
 
-func fail(err error) {
+func exitWithError(err error) {
 	fmt.Fprint(os.Stderr, err)
 	os.Exit(1)
 }
