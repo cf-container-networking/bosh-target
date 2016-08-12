@@ -33,12 +33,17 @@ func main() {
 		os.Exit(0)
 	}
 
-	homeDir := os.Getenv("HOME")
-	if homeDir == "" {
-		exitWithError(errors.New("$HOME not set"))
+	boshConfig := os.Getenv("BOSH_CONFIG")
+	if boshConfig == "" {
+		homeDir := os.Getenv("HOME")
+		if homeDir == "" {
+			exitWithError(errors.New("$HOME not set"))
+			os.Exit(1)
+		}
+		boshConfig = fmt.Sprintf("%s/.bosh_config", homeDir)
 	}
 
-	buf, err := ioutil.ReadFile(fmt.Sprintf("%s/.bosh_config", homeDir))
+	buf, err := ioutil.ReadFile(boshConfig)
 	if err != nil {
 		exitWithError(err)
 	}
